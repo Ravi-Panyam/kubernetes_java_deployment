@@ -31,12 +31,21 @@ spec:
     spec:
       containers:
       - name: stockmanager
-        image: praveensingam1994/stockmanager:latest
+        image: ravipanyam/stockmanager:latest
         ports:
         - containerPort: 8030
         livenessProbe:
           httpGet:
             path: /health
             port: 8030
+          initialDelaySeconds: 40
+          timeoutSeconds: 5
+          periodSeconds: 10
+          failureThreshold: 3
+        
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8030
           initialDelaySeconds: 30
-          timeoutSeconds: 1
+          timeoutSeconds: 5
